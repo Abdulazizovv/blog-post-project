@@ -14,7 +14,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name="posts", on_delete=models.CASCADE)
     author = models.CharField(max_length=255, blank=True, null=True)
     body = models.TextField()
     status_choices = (
@@ -30,6 +30,4 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.body[:50] + "..." if len(self.body) > 50 else self.body
-    
-
+        return self.body[:50] + "..." if len(self.body) > 50 else self.body  

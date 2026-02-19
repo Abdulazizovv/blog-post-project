@@ -10,6 +10,8 @@ def post_list(request):
         status = request.POST.get("status")
         category_id = request.POST.get("category")
 
+        categories = Category.objects.all()
+
         category = Category.objects.get(id=category_id)
 
         post = Post.objects.create(
@@ -22,6 +24,14 @@ def post_list(request):
 
     posts = Post.objects.all()
     categories = Category.objects.all()
+    import random
+
+    return render(request,"main/index.html", context={"posts": posts, "categories": categories, "name": random.randint(1, 999)})
 
 
-    return render(request,"index.html", context={"posts": posts, "categories": categories})
+
+def test_view(request):
+    context = {
+        "mylist": list(range(10))
+    }
+    return render(request, "main/test.html", context=context)
